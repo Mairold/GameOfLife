@@ -2,30 +2,33 @@
 
     import {onMount} from "svelte";
 
-    let gameGrid = []
     let gameBoard
+    let rows = []
+    let columns = []
 
     function calculateGameBoard() {
-        let rows = Math.floor(gameBoard.offsetWidth / 20)
-        let columns = Math.floor(gameBoard.offsetHeight / 20)
-        gameGrid = Array.from({length: (rows * columns)}, (v, i) => i)
+        columns = Array.from({length: (Math.floor(gameBoard.offsetWidth / 20))}, (v, i) => i + 1)
+        rows = Array.from({length: (Math.floor(gameBoard.offsetHeight / 20))}, (v, i) => i + 1)
+    }
+
+    function setCellAlive(e) {
+        document.getElementById(e.target.id).classList.toggle('alive')
     }
 
     onresize = calculateGameBoard
     onMount(() => calculateGameBoard())
 
-    function setCellAlive(e) {
-        document.getElementById(e.target.id).classList.toggle('cheese')
-        // document.getElementById(e.target.id).classList.toggle('cell')
-    }
-
 </script>
 <div class="div">
-    <div bind:this={gameBoard} class="gameBoard">
-        {#each gameGrid as cell}
-            <div id="{'cell' + cell}" on:click={setCellAlive} class="cell cheese"></div>
+    <table bind:this={gameBoard} class="gameBoard">
+        {#each rows as row (row)}
+            <tr>
+                {#each columns as column}
+                    <td id="{row + '_' + column}" on:click={setCellAlive} class="cell alive"></td>
+                {/each}
+            </tr>
         {/each}
-    </div>
+    </table>
 </div>
 
 <style>
@@ -34,23 +37,22 @@
         width: 100%;
         flex: 6;
         padding: 2%;
-
     }
 
     .gameBoard {
-        display: grid;
-        grid-template: repeat(auto-fill, 20px) / repeat(auto-fill, 20px);
+        display: block;
         width: 90%;
-        height: 100%;
+        height: 99%;
     }
 
     .cell {
-        border: #FFF8D6 solid 0.01rem;
         background-color: #A4D0A4;
+        border: #FFF8D6 solid 0.01rem;
+        height: 20px;
+        width: 20px;
     }
 
-    .cheese {
+    .alive {
         background-color: #F7E1AE;
-        z-index: 1;
     }
 </style>
