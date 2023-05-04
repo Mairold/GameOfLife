@@ -1,14 +1,16 @@
 <script>
 
-import Header from "./Header.svelte";
-import Game from "./Game.svelte";
-import Footer from "./Footer.svelte";
+import Header from "./lib/Header.svelte";
+import Game from "./lib/Game.svelte";
+import Footer from "./lib/Footer.svelte";
+
+let game
 </script>
 
 <main>
     <Header />
-    <Game />
-    <Footer />
+    <Game bind:this={game} />
+    <Footer on:toggle={game.toggleCellState} on:clear={game.clear}/>
 </main>
 
 <style>

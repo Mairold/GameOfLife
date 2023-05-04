@@ -1,18 +1,45 @@
 <script>
 
     import {onMount} from "svelte";
+    import {keepAliveCells, toggleCells} from "./cellsStore.js";
 
     let gameBoard
     let rows = []
     let columns = []
+
 
     function calculateGameBoard() {
         columns = Array.from({length: (Math.floor(gameBoard.offsetWidth / 20))}, (v, i) => i + 1)
         rows = Array.from({length: (Math.floor(gameBoard.offsetHeight / 20))}, (v, i) => i + 1)
     }
 
-    function setCellAlive(e) {
-        document.getElementById(e.target.id).classList.toggle('alive')
+    function toggleCell(e) {
+        let selectedCell = e.target.id;
+        document.getElementById(selectedCell).classList.toggle('alive')
+        switchCellState(selectedCell);
+    }
+
+    function switchCellState(selectedCell) {
+        if ($keepAliveCells.includes(selectedCell)) {
+            $keepAliveCells = $keepAliveCells.filter(cell => cell !== selectedCell)
+        } else {
+            $keepAliveCells.push(selectedCell)
+        }
+    }
+
+  export function toggleCellState() {
+        for (let cell of $toggleCells) {
+            document.getElementById(cell).classList.toggle('alive')
+        }
+        $toggleCells = []
+    }
+
+    export function clear() {
+        for (let cell of $keepAliveCells) {
+            document.getElementById(cell).classList.toggle('alive')
+        }
+        $keepAliveCells = []
+        $toggleCells = []
     }
 
     onresize = calculateGameBoard
@@ -24,7 +51,7 @@
         {#each rows as row (row)}
             <tr>
                 {#each columns as column}
-                    <td id="{row + '_' + column}" on:click={setCellAlive} class="cell alive"></td>
+                    <td id="{row + '_' + column}" on:click={toggleCell} class="cell alive"></td>
                 {/each}
             </tr>
         {/each}
