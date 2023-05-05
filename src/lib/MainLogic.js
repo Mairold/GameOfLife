@@ -3,7 +3,7 @@ let processedCells = {
     'toggleCells': []
 }
 
-export function checkCells(liveCells) {
+export function checkCells(liveCells, boardHeight, boardWidth) {
     processedCells.keepAliveCells = []
     processedCells.toggleCells = []
     let x
@@ -17,10 +17,10 @@ export function checkCells(liveCells) {
         for (let i = -1; i <= 1; i++) {
             for (let j = -1; j <= 1; j++) {
                 if (!(i === 0 && j === 0)) {
-                    let cell = (y + i) + '_' + (x + j)
+                    let cell = (((y + i + boardHeight) % boardHeight) + '_' + ((x + j + boardWidth) % boardWidth))
                     if (liveCells.includes(cell)) {
                         count++
-                    } else if ((y + i) > 0 && (x + j) > 0) {
+                    } else {
                         deadCellsWithLiveNeighbours.push(cell)
                     }
                 }
@@ -33,7 +33,6 @@ export function checkCells(liveCells) {
 }
 
 
-
 function sortLiveCells(count, cell) {
     if ((count === 2 || count === 3) && !processedCells.keepAliveCells.includes(cell)) {
         processedCells.keepAliveCells.push(cell)
@@ -44,7 +43,7 @@ function sortLiveCells(count, cell) {
 
 
 function sortDeadCells(deadCellsWithLiveNeighbours) {
-    let uniqueValues = [... new Set(deadCellsWithLiveNeighbours)]
+    let uniqueValues = [...new Set(deadCellsWithLiveNeighbours)]
     for (let deadCell of uniqueValues) {
         let size = deadCellsWithLiveNeighbours.filter(element => element === deadCell).length
         if (size === 3) {

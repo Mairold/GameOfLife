@@ -17,6 +17,7 @@
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
+  color: #617A55;
 }
 
 main{
@@ -35,9 +36,10 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: #617A55;
   cursor: pointer;
   transition: border-color 0.25s;
+  margin: 1%;
 }
 button:hover {
   border-color: #646cff;
@@ -57,6 +59,7 @@ button:focus-visible {
     color: #747bff;
   }
   button {
-    background-color: #f9f9f9;
+    color: #617A55;
+    background-color: #F7E1AE;
   }
 }
