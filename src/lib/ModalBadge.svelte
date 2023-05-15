@@ -33,7 +33,7 @@
         align-items: center;
     }
     dialog[open] {
-        animation: zoom 0.9s cubic-bezier(0.34, 1.56, 0.64, 1);
+        animation: zoom 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
     @keyframes zoom {
         from {

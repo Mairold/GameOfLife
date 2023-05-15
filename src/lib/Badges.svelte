@@ -3,6 +3,8 @@
     import {checkPattern} from "./PatternCheckLogic.js";
     import {createEventDispatcher} from "svelte";
     import ModalBadge from "./ModalBadge.svelte";
+    import { slide, scale, draw, crossfade , fly } from 'svelte/transition';
+    import {linear} from "svelte/easing";
 
     let dispatch = createEventDispatcher()
     let cyclops = false
@@ -21,6 +23,7 @@
             let pattern = checkPattern($aliveCells, badgeName);
             if (pattern.length > 0) {
                 dispatch('pattern', pattern)
+                dispatch('stopIteration')
                 return true
             }
             return false
@@ -44,14 +47,14 @@
 
 <div class="badgesSection">
     {#if cyclops}
-        <img class="badgeImage" id="Cyclops" on:click={showBadge} src="src/assets/Cyclops_homm3.jpg">
+        <img in:slide="{{ duration: 800, easing: linear }}" class="badgeImage" id="Cyclops" on:click={showBadge} src="src/assets/Cyclops_homm3.jpg">
     {:else}
-        <img class="badgeImage" src="src/assets/Tub.png">
+        <img out:slide="{{ duration: 800, easing: linear }}" class="badgeImage" src="src/assets/Tub.png">
     {/if}
     {#if angel}
-        <img class="badgeImage" id="Angel" on:click={showBadge} src="src/assets/Angel_homm3.jpg">
+        <img in:slide="{{ duration: 500, easing: linear}}" class="badgeImage" id="Angel" on:click={showBadge} src="src/assets/Angel_homm3.jpg">
     {:else}
-        <img class="badgeImage" src="src/assets/Angel.png">
+        <img out:slide="{{ duration: 500, easing: linear}}" class="badgeImage" src="src/assets/Angel.png">
     {/if}
 </div>
 

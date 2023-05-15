@@ -2,6 +2,7 @@
 
     import {aliveCells} from "./cellsStore.js";
     import {checkCells} from "./MainLogic.js";
+    import {onMount} from "svelte";
 
     let gameBoard
     let rows = []
@@ -55,12 +56,16 @@
         changedCells = processedCells.toggleCells
     }
 
-    export function clear() {
+    export function clearGameBoard() {
         for (let cell of $aliveCells) {
             document.getElementById(cell).classList.toggle('dead')
         }
         $aliveCells = []
         changedCells = []
+
+        for (let cell of highlightedPattern) {
+            document.getElementById(cell).classList.toggle('highlight')
+        }
         highlightedPattern = []
     }
 

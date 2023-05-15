@@ -6,7 +6,7 @@
     let intervalSpeed = 5;
 
     function clearGameBoard() {
-        stop()
+        stopCycle()
         dispatch('clear')
     }
 
@@ -15,11 +15,11 @@
     }
 
     function play() {
-        stop()
+        stopCycle()
         interval = setInterval(iterateCycle, intervalSpeed * 100)
     }
 
-    export function stop() {
+    export function stopCycle() {
         clearInterval(interval)
     }
 
@@ -27,7 +27,7 @@
 <div class="controls">
     <button on:click={iterateCycle}> Iterate</button>
     <button on:click={play}> play</button>
-    <button on:click={stop}> stop</button>
+    <button on:click={stopCycle}> stop</button>
     <button on:click={clearGameBoard}> clear</button>
     <div class="cycleDurationSelector">
         <label for="cycleDuration">Cycle Duration</label>
