@@ -1,116 +1,35 @@
 <script>
 
-    import {onMount} from "svelte";
-    import {aliveCells} from "./cellsStore.js";
-    import {checkCells} from "./MainLogic.js";
+    import GameBoard from "./GameBoard.svelte";
+    import Badges from "./Badges.svelte";
 
     let gameBoard
-    let rows = []
-    let columns = []
-    let changedCells
-    let highlightedPattern
+    let badges
+    let badgeName
 
-    function calculateGameBoard() {
-        columns = Array.from({length: (Math.floor(gameBoard.offsetWidth / 20))}, (v, i) => i)
-        rows = Array.from({length: (Math.floor(gameBoard.offsetHeight / 20))}, (v, i) => i)
-    }
 
-    function toggleCell(e) {
-        let selectedCell = e.target.id;
-        document.getElementById(selectedCell).classList.toggle('dead')
-        changeAliveCells(selectedCell);
-    }
-
-    function changeAliveCells(selectedCell) {
-        if ($aliveCells.includes(selectedCell)) {
-            $aliveCells = $aliveCells.filter(cell => cell !== selectedCell)
-        } else {
-            $aliveCells.push(selectedCell)
-        }
-    }
-
-    export function oneIteration() {
-        toggleBadgePattern()
-        updateAliveCells();
-
-        for (let cell of changedCells) {
-            document.getElementById(cell).classList.toggle('dead')
-        }
-        changedCells = []
-        highlightedPattern = []
-    }
-
-    export function toggleBadgePattern(e) {
-        if (e) {
-            highlightedPattern = e.detail
-        }
-        if (highlightedPattern) {
-            for (let cell of highlightedPattern) {
-                document.getElementById(cell).classList.toggle('highlight')
+    export function runOneIteration() {
+        gameBoard.oneIteration()
+        badges.checkPatterns()
             }
-        }
+
+    export function clearGameState() {
+        gameBoard.clear()
+        badges.clearBadges()
+
     }
-
-    function updateAliveCells() {
-        let processedCells = checkCells($aliveCells, rows.length, columns.length)
-        $aliveCells = processedCells.keepAliveCells
-        changedCells = processedCells.toggleCells
-    }
-
-    export function clear() {
-        for (let cell of $aliveCells) {
-            document.getElementById(cell).classList.toggle('dead')
-        }
-        $aliveCells = []
-        changedCells = []
-        highlightedPattern = []
-    }
-
-    onresize = calculateGameBoard
-    onMount(() => calculateGameBoard())
-
 
 </script>
-<div class="gameSection">
-    <table bind:this={gameBoard} class="gameBoard">
-        {#each rows as row (row)}
-            <tr>
-                {#each columns as column}
-                    <td id="{row + '_' + column}" on:click={toggleCell} class="cell dead alive"></td>
-                {/each}
-            </tr>
-        {/each}
-    </table>
+
+<div class="game">
+    <GameBoard bind:this={gameBoard}/>
+    <Badges bind:this={badges} on:pattern={gameBoard.toggleBadgePattern}/>
 </div>
 
 <style>
-    .gameSection {
+    .game {
         width: 100%;
-        flex: 8;
-        padding: 2%;
+        display: flex;
     }
 
-    .gameBoard {
-        display: block;
-        width: 99%;
-        height: 99%;
-    }
-
-    .cell {
-        border: #FFF8D6 solid 0.01rem;
-        height: 20px;
-        width: 20px;
-    }
-
-    :global(.highlight) {
-        background-color: #646cff !important;
-    }
-
-    .alive {
-        background-color: #A4D0A4;
-    }
-
-    .dead {
-        background-color: #F7E1AE;
-    }
 </style>

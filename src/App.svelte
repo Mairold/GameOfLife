@@ -1,22 +1,10 @@
 <script>
 
     import Header from "./lib/Header.svelte";
-    import Game from "./lib/Game.svelte";
     import Footer from "./lib/Footer.svelte";
-    import Badges from "./lib/Badges.svelte";
+    import Game from "./lib/Game.svelte";
 
     let game
-    let badges
-
-    function runOneIteration() {
-        game.oneIteration()
-        badges.checkPatterns()
-    }
-
-    function clearGameState() {
-        game.clear()
-        badges.clearBadges()
-    }
 
 </script>
 
@@ -25,11 +13,10 @@
         <Header/>
     </div>
     <div class="gameSection">
-        <Game bind:this={game}/>
-        <Badges bind:this={badges} on:pattern={game.toggleBadgePattern}/>
+        <Game bind:this={game}></Game>
     </div>
     <div class="footer">
-        <Footer on:toggle={runOneIteration} on:clear={clearGameState}/>
+        <Footer on:toggle={game.runOneIteration} on:clear={game.clearGameState}/>
     </div>
 </main>
 
