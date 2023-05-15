@@ -24,6 +24,11 @@
         return true
     }
 
+    export function clearBadges() {
+        tub = false
+        angel = false
+    }
+
 </script>
 
 <div class="badgesSection">

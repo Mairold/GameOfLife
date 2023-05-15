@@ -8,6 +8,7 @@
     let rows = []
     let columns = []
     let changedCells
+    let highlightedPattern
 
 
     function calculateGameBoard() {
@@ -29,14 +30,21 @@
         }
     }
 
-  export function toggleCellState() {
-      let processedCells = checkCells($keepAliveCells, rows.length, columns.length)
-      $keepAliveCells = processedCells.keepAliveCells
-      changedCells = processedCells.toggleCells
+    function updateAliveCells() {
+        let processedCells = checkCells($keepAliveCells, rows.length, columns.length)
+        $keepAliveCells = processedCells.keepAliveCells
+        changedCells = processedCells.toggleCells
+    }
+
+    export function oneIteration() {
+        toggleBadgePattern()
+        updateAliveCells();
+
         for (let cell of changedCells) {
             document.getElementById(cell).classList.toggle('dead')
         }
         changedCells = []
+        highlightedPattern = []
     }
 
     export function clear() {
@@ -45,13 +53,17 @@
         }
         $keepAliveCells = []
         changedCells = []
+        highlightedPattern = []
     }
 
-    export function highlightPattern(e) {
-        console.log('pattern is ' + e.detail)
-        for (let cell of e.detail) {
-            document.getElementById(cell).classList.toggle('highlight')
-            setTimeout(() => document.getElementById(cell).classList.toggle('highlight'),500)
+    export function toggleBadgePattern(e) {
+        if (e) {
+            highlightedPattern = e.detail
+        }
+        if (highlightedPattern) {
+            for (let cell of highlightedPattern) {
+                document.getElementById(cell).classList.toggle('highlight')
+            }
         }
     }
 
@@ -92,7 +104,7 @@
     }
 
     :global(.highlight) {
-        background-color: #646cff !important ;
+        background-color: #646cff !important;
     }
 
     .alive {

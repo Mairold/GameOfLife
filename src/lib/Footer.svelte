@@ -6,8 +6,8 @@
     let intervalSpeed = 5;
 
     function clearGameBoard() {
+        stop()
         dispatch('clear')
-        clearInterval(interval)
     }
 
     function iterateCycle() {
@@ -19,7 +19,7 @@
         interval = setInterval(iterateCycle, intervalSpeed * 100)
     }
 
-    function stop() {
+    export function stop() {
         clearInterval(interval)
     }
 

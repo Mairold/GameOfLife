@@ -8,9 +8,14 @@
     let game
     let badges
 
-    function runOneCycle() {
-        game.toggleCellState()
+    function runOneIteration() {
+        game.oneIteration()
         badges.checkPatterns()
+    }
+
+    function clearGameState() {
+        game.clear()
+        badges.clearBadges()
     }
 
 </script>
@@ -21,10 +26,10 @@
     </div>
     <div class="gameSection">
         <Game bind:this={game}/>
-        <Badges bind:this={badges} on:pattern={game.highlightPattern}/>
+        <Badges bind:this={badges} on:pattern={game.toggleBadgePattern}/>
     </div>
     <div class="footer">
-        <Footer on:toggle={runOneCycle} on:clear={game.clear}/>
+        <Footer on:toggle={runOneIteration} on:clear={clearGameState}/>
     </div>
 </main>
 
