@@ -1,7 +1,7 @@
 <script>
 
     import {onMount} from "svelte";
-    import {keepAliveCells} from "./cellsStore.js";
+    import {aliveCells} from "./cellsStore.js";
     import {checkCells} from "./MainLogic.js";
 
     let gameBoard
@@ -9,7 +9,6 @@
     let columns = []
     let changedCells
     let highlightedPattern
-
 
     function calculateGameBoard() {
         columns = Array.from({length: (Math.floor(gameBoard.offsetWidth / 20))}, (v, i) => i)
@@ -19,21 +18,15 @@
     function toggleCell(e) {
         let selectedCell = e.target.id;
         document.getElementById(selectedCell).classList.toggle('dead')
-        switchCellState(selectedCell);
+        changeAliveCells(selectedCell);
     }
 
-    function switchCellState(selectedCell) {
-        if ($keepAliveCells.includes(selectedCell)) {
-            $keepAliveCells = $keepAliveCells.filter(cell => cell !== selectedCell)
+    function changeAliveCells(selectedCell) {
+        if ($aliveCells.includes(selectedCell)) {
+            $aliveCells = $aliveCells.filter(cell => cell !== selectedCell)
         } else {
-            $keepAliveCells.push(selectedCell)
+            $aliveCells.push(selectedCell)
         }
-    }
-
-    function updateAliveCells() {
-        let processedCells = checkCells($keepAliveCells, rows.length, columns.length)
-        $keepAliveCells = processedCells.keepAliveCells
-        changedCells = processedCells.toggleCells
     }
 
     export function oneIteration() {
@@ -43,15 +36,6 @@
         for (let cell of changedCells) {
             document.getElementById(cell).classList.toggle('dead')
         }
-        changedCells = []
-        highlightedPattern = []
-    }
-
-    export function clear() {
-        for (let cell of $keepAliveCells) {
-            document.getElementById(cell).classList.toggle('dead')
-        }
-        $keepAliveCells = []
         changedCells = []
         highlightedPattern = []
     }
@@ -67,13 +51,28 @@
         }
     }
 
+    function updateAliveCells() {
+        let processedCells = checkCells($aliveCells, rows.length, columns.length)
+        $aliveCells = processedCells.keepAliveCells
+        changedCells = processedCells.toggleCells
+    }
+
+    export function clear() {
+        for (let cell of $aliveCells) {
+            document.getElementById(cell).classList.toggle('dead')
+        }
+        $aliveCells = []
+        changedCells = []
+        highlightedPattern = []
+    }
+
     onresize = calculateGameBoard
     onMount(() => calculateGameBoard())
 
 
 </script>
-<div class="badgesSection">
-    <table bind:this={gameBoard} class="gameSection">
+<div class="gameSection">
+    <table bind:this={gameBoard} class="gameBoard">
         {#each rows as row (row)}
             <tr>
                 {#each columns as column}
@@ -85,13 +84,13 @@
 </div>
 
 <style>
-    .badgesSection {
+    .gameSection {
         width: 100%;
         flex: 8;
         padding: 2%;
     }
 
-    .gameSection {
+    .gameBoard {
         display: block;
         width: 99%;
         height: 99%;

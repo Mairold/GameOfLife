@@ -1,5 +1,5 @@
 <script>
-    import {keepAliveCells} from "./cellsStore.js";
+    import {aliveCells} from "./cellsStore.js";
     import {checkPattern} from "./PatternCheckLogic.js";
     import {createEventDispatcher} from "svelte";
 
@@ -14,7 +14,7 @@
 
     function checkSinglePattern(badge, badgeName) {
         if (!badge) {
-            let pattern = checkPattern($keepAliveCells, badgeName);
+            let pattern = checkPattern($aliveCells, badgeName);
             if (pattern.length > 0) {
                 dispatch('pattern', pattern)
                 return true

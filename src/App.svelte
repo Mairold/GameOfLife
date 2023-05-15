@@ -50,9 +50,7 @@
 
     .gameSection {
         border: #617A55 solid 2px;
-        width: 100%;
         flex: 6;
         display: flex;
-
     }
 </style>
