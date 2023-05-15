@@ -8,24 +8,42 @@
     let game
     let badges
 
-     function runOneCycle() {
-         game.toggleCellState()
-         badges.checkPatterns()
+    function runOneCycle() {
+        game.toggleCellState()
+        badges.checkPatterns()
     }
+
 </script>
 
 <main>
-    <Header/>
-    <div class="gameBoard">
+    <div class="header">
+        <Header/>
+    </div>
+    <div class="gameSection">
         <Game bind:this={game}/>
         <Badges bind:this={badges} on:pattern={game.highlightPattern}/>
     </div>
-    <Footer on:toggle={runOneCycle} on:clear={game.clear}/>
+    <div class="footer">
+        <Footer on:toggle={runOneCycle} on:clear={game.clear}/>
+    </div>
 </main>
 
 <style>
 
-    .gameBoard {
+    .footer {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+    }
+
+    .header {
+        flex: 1;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+    }
+
+    .gameSection {
         border: #617A55 solid 2px;
         width: 100%;
         flex: 6;

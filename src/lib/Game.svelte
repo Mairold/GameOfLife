@@ -1,18 +1,18 @@
 <script>
 
     import {onMount} from "svelte";
-    import {boardColumns, boardRows, keepAliveCells, toggleCells} from "./cellsStore.js";
+    import {keepAliveCells} from "./cellsStore.js";
+    import {checkCells} from "./MainLogic.js";
 
     let gameBoard
     let rows = []
     let columns = []
+    let changedCells
 
 
     function calculateGameBoard() {
         columns = Array.from({length: (Math.floor(gameBoard.offsetWidth / 20))}, (v, i) => i)
         rows = Array.from({length: (Math.floor(gameBoard.offsetHeight / 20))}, (v, i) => i)
-        $boardColumns = columns
-        $boardRows = rows
     }
 
     function toggleCell(e) {
@@ -30,10 +30,13 @@
     }
 
   export function toggleCellState() {
-        for (let cell of $toggleCells) {
+      let processedCells = checkCells($keepAliveCells, rows.length, columns.length)
+      $keepAliveCells = processedCells.keepAliveCells
+      changedCells = processedCells.toggleCells
+        for (let cell of changedCells) {
             document.getElementById(cell).classList.toggle('dead')
         }
-        $toggleCells = []
+        changedCells = []
     }
 
     export function clear() {
@@ -41,7 +44,7 @@
             document.getElementById(cell).classList.toggle('dead')
         }
         $keepAliveCells = []
-        $toggleCells = []
+        changedCells = []
     }
 
     export function highlightPattern(e) {
@@ -57,8 +60,8 @@
 
 
 </script>
-<div class="div">
-    <table bind:this={gameBoard} class="gameBoard">
+<div class="badgesSection">
+    <table bind:this={gameBoard} class="gameSection">
         {#each rows as row (row)}
             <tr>
                 {#each columns as column}
@@ -70,13 +73,13 @@
 </div>
 
 <style>
-    .div {
+    .badgesSection {
         width: 100%;
         flex: 8;
         padding: 2%;
     }
 
-    .gameBoard {
+    .gameSection {
         display: block;
         width: 99%;
         height: 99%;

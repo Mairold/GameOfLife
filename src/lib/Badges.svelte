@@ -25,17 +25,18 @@
     }
 
 </script>
-<div class="div">
+
+<div class="badgesSection">
     {#if tub}
         <img src="src/assets/Tub.png">
     {/if}
     {#if angel}
         <img src="src/assets/Angel.png">
     {/if}
-
 </div>
+
 <style>
-    .div {
+    .badgesSection {
         border-left: #617A55 solid 2px;
         width: 100%;
         flex: 2;
