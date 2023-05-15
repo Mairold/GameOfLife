@@ -9,18 +9,22 @@
     let dispatch = createEventDispatcher()
     let cyclops = false
     let angel = false
+    let powerLich = false
+    let hydra = false
     let showModal = false
-    let badgeName;
+    let badgeName
 
     let imageSrc
     export function checkPatterns() {
         cyclops = cyclops ? true : checkSinglePattern(cyclops, 'cyclops')
         angel = angel ? true : checkSinglePattern(angel, 'angel')
-
+        powerLich = powerLich ? true : checkSinglePattern(powerLich, 'powerLich')
+        hydra = hydra ? true : checkSinglePattern(hydra, 'hydra')
     }
     function checkSinglePattern(badge, badgeName) {
         if (!badge) {
-            let pattern = checkPattern($aliveCells, badgeName);
+            let pattern = checkPattern($aliveCells, badgeName)
+            console.log(pattern)
             if (pattern.length > 0) {
                 dispatch('pattern', pattern)
                 dispatch('stopIteration')
@@ -34,7 +38,8 @@
     export function clearBadges() {
         cyclops = false
         angel = false
-
+        powerLich = false
+        hydra = false
     }
     function showBadge(e) {
         showModal = true
@@ -55,6 +60,16 @@
         <img in:slide="{{ duration: 500, easing: linear}}" class="badgeImage" id="Angel" on:click={showBadge} src="src/assets/Angel_homm3.jpg">
     {:else}
         <img out:slide="{{ duration: 500, easing: linear}}" class="badgeImage" src="src/assets/Angel.png">
+    {/if}
+    {#if powerLich}
+        <img in:slide="{{ duration: 500, easing: linear}}" class="badgeImage" id="PowerLich" on:click={showBadge} src="src/assets/PowerLich_homm3.jpg">
+    {:else}
+        <img out:slide="{{ duration: 500, easing: linear}}" class="badgeImage" src="src/assets/PowerLich.png">
+    {/if}
+    {#if hydra}
+        <img in:slide="{{ duration: 500, easing: linear}}" class="badgeImage" id="Hydra" on:click={showBadge} src="src/assets/Hydra_homm3.jpg">
+    {:else}
+        <img out:slide="{{ duration: 500, easing: linear}}" class="badgeImage" src="src/assets/Hydra.png">
     {/if}
 </div>
 

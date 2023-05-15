@@ -1,10 +1,14 @@
 let cyclops = ['-1_1', '0_2', '1_1']
-let angel = ['+1_-2','+1_-1','+1_+1','+1_+2','+2_-1','+2_+1','+3_0',]
+let angel = ['+1_-2','+1_-1','+1_+1','+1_+2','+2_-1','+2_+1','+3_0']
+let powerLich = ['-2_-1','-2_+1','-1_-2','-1_+2','0_-2','0_+2','+1_-1','+1_0','+1_+1','+2_0']
+let hydra = ['-2_-2','-2_0','-2_+2','-1_-2','-1_0','-1_+2','0_-2','0_-1','0_+1','0_+2','+1_-1','+1_0','+1_+1']
 
 export function checkPattern(liveCells,badge) {
     switch (badge) {
         case ('cyclops') : return checkBadgePattern(liveCells,cyclops)
         case ('angel') : return checkBadgePattern(liveCells,angel)
+        case ('powerLich') : return checkBadgePattern(liveCells,powerLich)
+        case ('hydra') : return checkBadgePattern(liveCells,hydra)
     }
 }
 
