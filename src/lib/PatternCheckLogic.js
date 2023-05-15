@@ -1,9 +1,9 @@
-let tub = ['-1_1', '0_2', '1_1']
+let cyclops = ['-1_1', '0_2', '1_1']
 let angel = ['+1_-2','+1_-1','+1_+1','+1_+2','+2_-1','+2_+1','+3_0',]
 
 export function checkPattern(liveCells,badge) {
     switch (badge) {
-        case ('tub') : return checkBadgePattern(liveCells,tub)
+        case ('cyclops') : return checkBadgePattern(liveCells,cyclops)
         case ('angel') : return checkBadgePattern(liveCells,angel)
     }
 }

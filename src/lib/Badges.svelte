@@ -2,16 +2,20 @@
     import {aliveCells} from "./cellsStore.js";
     import {checkPattern} from "./PatternCheckLogic.js";
     import {createEventDispatcher} from "svelte";
+    import ModalBadge from "./ModalBadge.svelte";
 
-    let tub = false
-    let angel = false
     let dispatch = createEventDispatcher()
+    let cyclops = false
+    let angel = false
+    let showModal = false
+    let badgeName;
 
+    let imageSrc
     export function checkPatterns() {
-        tub = checkSinglePattern(tub, 'tub');
-        angel = checkSinglePattern(angel, 'angel');
-    }
+        cyclops = cyclops ? true : checkSinglePattern(cyclops, 'cyclops')
+        angel = angel ? true : checkSinglePattern(angel, 'angel')
 
+    }
     function checkSinglePattern(badge, badgeName) {
         if (!badge) {
             let pattern = checkPattern($aliveCells, badgeName);
@@ -22,23 +26,42 @@
             return false
         }
         return true
-    }
 
+    }
     export function clearBadges() {
-        tub = false
+        cyclops = false
         angel = false
+
+    }
+    function showBadge(e) {
+        showModal = true
+        badgeName = e.target.id
+        imageSrc = 'src/assets/' + badgeName + '_homm3.jpg'
+
     }
 
 </script>
 
 <div class="badgesSection">
-    {#if tub}
-        <img src="src/assets/Tub.png">
+    {#if cyclops}
+        <img class="badgeImage" id="Cyclops" on:click={showBadge} src="src/assets/Cyclops_homm3.jpg">
+    {:else}
+        <img class="badgeImage" src="src/assets/Tub.png">
     {/if}
     {#if angel}
-        <img src="src/assets/Angel.png">
+        <img class="badgeImage" id="Angel" on:click={showBadge} src="src/assets/Angel_homm3.jpg">
+    {:else}
+        <img class="badgeImage" src="src/assets/Angel.png">
     {/if}
 </div>
+
+<ModalBadge bind:showModal>
+    <h2 slot="header">
+        {badgeName}
+    </h2>
+    <img class="modalImage" src={imageSrc}>
+</ModalBadge>
+
 
 <style>
     .badgesSection {
@@ -55,6 +78,12 @@
         width: 60px;
         height: 60px;
         margin-top: 2%;
-        border-radius: 1px;
+        border-radius: 0.2em;
+    }
+
+    .modalImage {
+        height: 360px ;
+        width: 100%;
+        margin: 5%;
     }
 </style>
