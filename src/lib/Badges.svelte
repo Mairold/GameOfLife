@@ -82,6 +82,7 @@
     }
 
 </script>
+
 <div class="badges">
     <div class="badgesSection">
         {#each badges as badge, i}
@@ -103,7 +104,6 @@
     </h2>
     <img class="modalImage" src={imageSrc}>
 </ModalBadge>
-
 
 <style>
     .badges {

@@ -1,3 +1,4 @@
+
 let angel = ['+1_-2','+1_-1','+1_+1','+1_+2','+2_-1','+2_+1','+3_0']
 let powerLich = ['-2_-1','-2_+1','-1_-2','-1_+2','0_-2','0_+2','+1_-1','+1_0','+1_+1','+2_0']
 let hydra = ['-2_-2','-2_0','-2_+2','-1_-2','-1_0','-1_+2','0_-2','0_-1','0_+1','0_+2','+1_-1','+1_0','+1_+1']
@@ -8,9 +9,6 @@ let fairyDragon = ['-3_+1','-2_-2','-2_+2','-1_-1','-1_+2','0_-1','0_+1','+1_-2'
 let gryffin = ['-2_+1','-2_+2','-1_-2','-1_+1','-1_+2','0_-1','0_+1','0_+2','+1_-1','+1_+2']
 let medusa = ['-1_+1','0_+2','+1_-1','+1_+2','+2_-2','+2_+1','+2_+2','+3_-1','+3_0','+3_+1']
 let phoenix = ['-2_-2','-2_+2','-1_-2','-1_+2','-1_0','0_-1','0_+1','+1_0','+2_0']
-
-
-
 
 export function checkPattern(liveCells,badge) {
     switch (badge) {
@@ -32,7 +30,7 @@ export function checkBadgePattern(liveCells,badge) {
     for (let cell of liveCells) {
         pattern.push(cell)
         for (let addend of badge) {
-            let cellToCheck = getCellToCheck(cell, addend);
+            let cellToCheck = getCellToCheck(cell, addend)
             if (!liveCells.includes(cellToCheck)) {
                 break
             }
@@ -47,5 +45,5 @@ export function checkBadgePattern(liveCells,badge) {
 function getCellToCheck(cell, addend) {
     let y = parseInt(cell.split('_')[0]) + parseInt(addend.split('_')[0])
     let x = parseInt(cell.split('_')[1]) + parseInt(addend.split('_')[1])
-    return y + '_' + x;
+    return y + '_' + x
 }

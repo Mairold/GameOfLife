@@ -16,9 +16,9 @@
     }
 
     function toggleCell(e) {
-        let selectedCell = e.target.id;
+        let selectedCell = e.target.id
         document.getElementById(selectedCell).classList.toggle('dead')
-        changeAliveCells(selectedCell);
+        changeAliveCells(selectedCell)
     }
 
     function changeAliveCells(selectedCell) {
@@ -72,8 +72,8 @@
     onresize = calculateGameBoard
     onMount(() => calculateGameBoard())
 
-
 </script>
+
 <div class="gameSection">
     <table bind:this={gameBoard} class="gameBoard">
         {#each rows as row (row)}

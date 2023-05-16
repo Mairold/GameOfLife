@@ -32,7 +32,6 @@ export function checkCells(liveCells, boardHeight, boardWidth) {
     return processedCells
 }
 
-
 function sortLiveCells(count, cell) {
     if ((count === 2 || count === 3) && !processedCells.keepAliveCells.includes(cell)) {
         processedCells.keepAliveCells.push(cell)
@@ -40,7 +39,6 @@ function sortLiveCells(count, cell) {
         processedCells.toggleCells.push(cell)
     }
 }
-
 
 function sortDeadCells(deadCellsWithLiveNeighbours) {
     let uniqueValues = [...new Set(deadCellsWithLiveNeighbours)]

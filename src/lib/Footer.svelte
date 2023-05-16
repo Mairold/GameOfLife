@@ -3,7 +3,7 @@
 
     const dispatch = createEventDispatcher()
     let interval
-    let intervalSpeed = 50;
+    let intervalSpeed = 50
 
     function clearGameBoard() {
         stopCycle()
@@ -24,6 +24,7 @@
     }
 
 </script>
+
 <div class="controls">
     <button on:click={iterateCycle}> Iterate</button>
     <button on:click={play}> play</button>
