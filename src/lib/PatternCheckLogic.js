@@ -42,7 +42,7 @@ export function checkBadgePattern(liveCells,badge) {
     return []
 }
 
-function getCellToCheck(cell, addend) {
+export function getCellToCheck(cell, addend) {
     let y = parseInt(cell.split('_')[0]) + parseInt(addend.split('_')[0])
     let x = parseInt(cell.split('_')[1]) + parseInt(addend.split('_')[1])
     return y + '_' + x
