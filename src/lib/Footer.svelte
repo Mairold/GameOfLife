@@ -3,7 +3,7 @@
 
     const dispatch = createEventDispatcher()
     let interval
-    let intervalSpeed = 5;
+    let intervalSpeed = 50;
 
     function clearGameBoard() {
         stopCycle()
@@ -16,7 +16,7 @@
 
     function play() {
         stopCycle()
-        interval = setInterval(iterateCycle, intervalSpeed * 100)
+        interval = setInterval(iterateCycle, intervalSpeed * 10)
     }
 
     export function stopCycle() {
@@ -31,7 +31,7 @@
     <button on:click={clearGameBoard}> clear</button>
     <div class="cycleDurationSelector">
         <label for="cycleDuration">Cycle Duration</label>
-        <input id="cycleDuration" type="range" min="1" max="10" bind:value={intervalSpeed} on:change={play}>
+        <input id="cycleDuration" type="range" min="1" max="100" bind:value={intervalSpeed} on:change={play}>
     </div>
 </div>
 
