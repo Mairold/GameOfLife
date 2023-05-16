@@ -57,6 +57,9 @@
         for (let badge of badges) {
             if (!badge.isFound) {
                 badge.isFound = checkSinglePattern(badge.name)
+                if (badge.isFound) {
+                    return
+                }
             }
         }
         badges = badges
@@ -116,10 +119,13 @@
         align-self: center;
     }
 
+    .badgeImage {
+        margin: 5px;
+    }
+
     img {
         width: 80px;
         height: 80px;
-        padding: 4%;
         border-radius: 0.2em;
     }
 
