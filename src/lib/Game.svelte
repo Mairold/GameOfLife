@@ -13,7 +13,6 @@
 
     export function clearGameState() {
         gameBoard.clearGameBoard()
-        badges.clearBadges()
     }
 
 </script>

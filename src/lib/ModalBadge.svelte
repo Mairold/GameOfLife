@@ -12,7 +12,7 @@
     <div on:click|stopPropagation>
         <slot name="header" />
         <slot />
-        <button on:click={() => dialog.close()}>close modal</button>
+        <button on:click={() => dialog.close()}>close</button>
     </div>
 </dialog>
 
