@@ -11,46 +11,16 @@
     let badgeName
     let imageSrc
     let badges = [
-        {
-            isFound: false,
-            name: 'Angel'
-        },
-        {
-            isFound: false,
-            name: 'Power_Lich'
-        },
-        {
-            isFound: false,
-            name: 'Hydra'
-        },
-        {
-            isFound: false,
-            name: 'Basilisk'
-        },
-        {
-            isFound: false,
-            name: 'Centaur'
-        },
-        {
-            isFound: false,
-            name: 'Fairy_Dragon'
-        },
-        {
-            isFound: false,
-            name: 'Black_Dragon'
-        },
-        {
-            isFound: false,
-            name: 'Gryffin'
-        },
-        {
-            isFound: false,
-            name: 'Medusa'
-        },
-        {
-            isFound: false,
-            name: 'Phoenix'
-        },
+        {isFound: false, name: 'Angel'},
+        {isFound: false, name: 'Power_Lich'},
+        {isFound: false, name: 'Hydra'},
+        {isFound: false, name: 'Basilisk'},
+        {isFound: false, name: 'Centaur'},
+        {isFound: false, name: 'Fairy_Dragon'},
+        {isFound: false, name: 'Black_Dragon'},
+        {isFound: false, name: 'Gryffin'},
+        {isFound: false, name: 'Medusa'},
+        {isFound: false, name: 'Phoenix'},
     ]
 
     export function checkPatterns() {
@@ -87,11 +57,13 @@
     <div class="badgesSection">
         {#each badges as badge, i}
             {#if badge.isFound}
-                <img in:slide="{{ duration: 500, easing: linear }}" class="badgeImage" style="grid-area: {(i % 5) + 1} / {(i % 2) + 1 }" id={badge.name}
+                <img in:slide="{{ duration: 500, easing: linear }}" class="badgeImage"
+                     style="grid-area: {(i % 5) + 1} / {(i % 2) + 1 }" id={badge.name}
                      on:click={showBadge}
                      src='src/assets/{badge.name}_homm3.jpg'>
             {:else}
-                <img out:slide="{{ duration: 500, easing: linear }}" class="badgeImage" style="grid-area: {(i % 5) + 1} / {(i % 2) + 1 }"
+                <img out:slide="{{ duration: 500, easing: linear }}" class="badgeImage"
+                     style="grid-area: {(i % 5) + 1} / {(i % 2) + 1 }"
                      src='src/assets/{badge.name}.png' on:click={() => console.log(badge.isFound)}>
             {/if}
         {/each}
