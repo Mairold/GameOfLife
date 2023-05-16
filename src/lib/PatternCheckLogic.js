@@ -14,16 +14,16 @@ let phoenix = ['-2_-2','-2_+2','-1_-2','-1_+2','-1_0','0_-1','0_+1','+1_0','+2_0
 
 export function checkPattern(liveCells,badge) {
     switch (badge) {
-        case ('angel') : return checkBadgePattern(liveCells,angel)
-        case ('powerLich') : return checkBadgePattern(liveCells,powerLich)
-        case ('hydra') : return checkBadgePattern(liveCells,hydra)
-        case ('basilisk') : return checkBadgePattern(liveCells,basilisk)
-        case ('blackDragon') : return checkBadgePattern(liveCells,blackDragon)
-        case ('centaur') : return checkBadgePattern(liveCells,centaur)
-        case ('fairyDragon') : return checkBadgePattern(liveCells,fairyDragon)
-        case ('gryffin') : return checkBadgePattern(liveCells,gryffin)
-        case ('medusa') : return checkBadgePattern(liveCells,medusa)
-        case ('phoenix') : return checkBadgePattern(liveCells,phoenix)
+        case ('Angel') : return checkBadgePattern(liveCells,angel)
+        case ('Power_Lich') : return checkBadgePattern(liveCells,powerLich)
+        case ('Hydra') : return checkBadgePattern(liveCells,hydra)
+        case ('Basilisk') : return checkBadgePattern(liveCells,basilisk)
+        case ('Black_Dragon') : return checkBadgePattern(liveCells,blackDragon)
+        case ('Centaur') : return checkBadgePattern(liveCells,centaur)
+        case ('Fairy_Dragon') : return checkBadgePattern(liveCells,fairyDragon)
+        case ('Gryffin') : return checkBadgePattern(liveCells,gryffin)
+        case ('Medusa') : return checkBadgePattern(liveCells,medusa)
+        case ('Phoenix') : return checkBadgePattern(liveCells,phoenix)
     }
 }
 

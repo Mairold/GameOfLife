@@ -78,7 +78,7 @@
     <table bind:this={gameBoard} class="gameBoard">
         {#each rows as row (row)}
             <tr>
-                {#each columns as column}
+                {#each columns as column (column)}
                     <td id="{row + '_' + column}" on:click={toggleCell} class="cell dead alive"></td>
                 {/each}
             </tr>
