@@ -17,7 +17,10 @@
         <Game bind:this={game} on:stopIteration={footer.stopCycle}></Game>
     </div>
     <div class="footer">
-        <Footer bind:this={footer} on:toggle={game.runOneIteration} on:clear={game.clearGameState}/>
+        <Footer bind:this={footer}
+                on:toggle={game.runOneIteration}
+                on:clear={game.clearGameState}
+                on:simplePattern={game.placePattern}/>
     </div>
 </main>
 

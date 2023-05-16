@@ -23,6 +23,10 @@
         clearInterval(interval)
     }
 
+    function placePattern() {
+        dispatch(('simplePattern'))
+    }
+
 </script>
 
 <div class="controls">
@@ -30,6 +34,7 @@
     <button on:click={play}> play</button>
     <button on:click={stopCycle}> stop</button>
     <button on:click={clearGameBoard}> clear</button>
+    <button on:click={placePattern}> Pattern</button>
     <div class="cycleDurationSelector">
         <label for="cycleDuration">Cycle Duration</label>
         <input id="cycleDuration" type="range" min="1" max="100" bind:value={intervalSpeed} on:change={play}>

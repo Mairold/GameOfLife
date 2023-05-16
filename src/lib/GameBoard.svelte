@@ -3,12 +3,14 @@
     import {aliveCells} from "./cellsStore.js";
     import {checkCells} from "./MainLogic.js";
     import {onMount} from "svelte";
+    import {getCellToCheck} from "./PatternCheckLogic.js";
 
     let gameBoard
     let rows = []
     let columns = []
     let highlightedPattern = []
     let changedCells
+    export let simpleElement
 
     function calculateGameBoard() {
         columns = Array.from({length: (Math.floor(gameBoard.offsetWidth / 20))}, (v, i) => i)
@@ -17,8 +19,17 @@
 
     function toggleCell(e) {
         let selectedCell = e.target.id
-        document.getElementById(selectedCell).classList.toggle('dead')
-        changeAliveCells(selectedCell)
+        if (simpleElement.placeElement) {
+            for ( let addend of simpleElement.elementPattern) {
+                let cell = getCellToCheck(selectedCell,addend)
+                document.getElementById(cell).classList.toggle('dead')
+                changeAliveCells(cell)
+            }
+        } else {
+            document.getElementById(selectedCell).classList.toggle('dead')
+            changeAliveCells(selectedCell)
+        }
+        simpleElement.placeElement = false
     }
 
     function changeAliveCells(selectedCell) {
