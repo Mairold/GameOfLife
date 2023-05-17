@@ -14,7 +14,7 @@
         <Header/>
     </div>
     <div class="gameSection">
-        <Game bind:this={game} on:stopIteration={footer.stopCycle}></Game>
+        <Game bind:this={game}></Game>
     </div>
     <div class="footer">
         <Footer bind:this={footer}
