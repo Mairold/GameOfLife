@@ -4,14 +4,15 @@
     const dispatch = createEventDispatcher()
     let interval
     let intervalSpeed = 50
+    export let game
 
     function clearGameBoard() {
         stopCycle()
-        dispatch('clear')
+        game.clearGameState()
     }
 
     function iterateCycle() {
-        dispatch('toggle')
+        game.runOneIteration()
     }
 
     function play() {
@@ -24,7 +25,7 @@
     }
 
     function placePattern() {
-        dispatch(('simplePattern'))
+        game.placePattern()
     }
 
 </script>
