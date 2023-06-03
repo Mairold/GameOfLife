@@ -38,6 +38,7 @@
     function checkSinglePattern(badgeName) {
         let pattern = checkPattern($aliveCells, badgeName)
         if (pattern.length > 0) {
+            badges = badges
             dispatch('pattern', pattern)
             dispatch('stopIteration')
             return true
